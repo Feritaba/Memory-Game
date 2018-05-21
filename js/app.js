@@ -2,22 +2,9 @@
  * Create a list that holds all of your cards
  */
 
-
-
-// $('.card').bind({
-//     click: function() {
-//         $('.deck .card').toggleClass('open');
-//     },
-// });
-
-// $('.card').click('li' , function(){
-// 	$('.card').toggleClass('open');
-// })
-
 $("#lists li").click(function() {
           $(this).toggleClass('open');
          });
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
