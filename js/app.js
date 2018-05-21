@@ -2,14 +2,6 @@
  * Create a list that holds all of your cards
  */
 
-
-
-// $('.card').bind({
-//     click: function() {
-//         $('.deck .card').toggleClass('open');
-//     },
-// });
-
 $('.card').click('li' , function(){
 	$('.card').toggleClass('open');
 })
