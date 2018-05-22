@@ -1,10 +1,32 @@
 /*
  * Create a list that holds all of your cards
  */
+let elements = document.getElementById("list-of-cards").getElementsByTagName("li");
+let cards = [];
+for(let i=0; i < elements.length; i++){
+	cards.push(elements[i]);
+	}
 
-$("#lists li").click(function() {
-          $(this).toggleClass('open');
-         });
+newGame();
+function newGame(){
+	let shuffleCards = shuffle(cards);
+	shuffleCards.forEach(function(){
+	})
+	}
+
+
+function onClick() {
+	$(this).toggleClass('open');
+}
+
+function openCard(){
+
+}
+
+ $(".card").click(onClick);
+ $(".restart").click(newGame);
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -26,6 +48,7 @@ function shuffle(array) {
 
     return array;
 }
+
 
 
 /*
