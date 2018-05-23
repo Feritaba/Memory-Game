@@ -1,5 +1,5 @@
 /* Memory Game */
- let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
+let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
  "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf",
  "fa-leaf", "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
@@ -13,16 +13,25 @@ function startGame(){
 	}
 $(startGame);
 
-function onClick() {
-	$(this).toggleClass('open');
-}
-
 function openCard(){
-
+	let counter = 0;
+	if (counter < 2) {
+		counter++;
+		$(this).toggleClass('open');
+	}
+	else {
+		$(this).toggleClass('close');
+	}
 }
 
- $(".card").click(onClick);
- $(".restart").click(startGame);
+ $(".card").click(function onClick(){
+ 	openCard();
+ });
+
+
+ $(".restart").click(function(){
+ 	startGame();
+ });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
