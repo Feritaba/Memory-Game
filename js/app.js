@@ -1,19 +1,17 @@
-/*
- * Create a list that holds all of your cards
- */
-let elements = document.getElementById("list-of-cards").getElementsByTagName("li");
-let cards = [];
-for(let i=0; i < elements.length; i++){
-	cards.push(elements[i]);
-	}
+/* Memory Game */
+ let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
+ "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf",
+ "fa-leaf", "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
-newGame();
-function newGame(){
-	let shuffleCards = shuffle(cards);
-	shuffleCards.forEach(function(){
-	})
+function startGame(){
+	deck = shuffle(deck);
+	let index = 0;
+	$.each($(".card i"), function(){
+		$(this).attr("class", "fa " + deck[index]);
+		index++;
+		});
 	}
-
+$(startGame);
 
 function onClick() {
 	$(this).toggleClass('open');
@@ -24,15 +22,7 @@ function openCard(){
 }
 
  $(".card").click(onClick);
- $(".restart").click(newGame);
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+ $(".restart").click(startGame);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -48,8 +38,6 @@ function shuffle(array) {
 
     return array;
 }
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
