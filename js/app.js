@@ -35,6 +35,11 @@ function openCard(card){
  	if (isValid( $(this) )) {
  		if (open.length < 2) {
  			openCard( $(this) );
+ 			setTimeout(function(){
+            	open.forEach(function(card){
+            		card.removeClass('open','show');
+            	});
+    		}, 1000);
  		}
  	}
  });
