@@ -20,6 +20,21 @@ function isValid(card){
 	return !(card.hasClass("open") || card.hasClass("match"));
 };
 
+//check if cards are match
+function checkMatch(){
+	if (open[0].children().attr("class")===open[1].children().attr("class")) {
+		return true;
+	} else { return false; }
+};
+
+//keep cards open if they match
+var setMatch = function() {
+	open.forEach(function(card) {
+		card.addClass("match");
+	});
+	open = []; matched += 2;
+};
+
 //open the card using classes to show the first and second card
 function openCard(card){
  	if (!card.hasClass('open')){
