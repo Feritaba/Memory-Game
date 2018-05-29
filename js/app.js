@@ -1,28 +1,33 @@
 /* Memory Game */
-let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
- "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf",
- "fa-leaf", "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
+let deck = ['fa-diamond', 'fa-diamond',
+			'fa-paper-plane-o', 'fa-paper-plane-o',
+ 			'fa-anchor', 'fa-anchor',
+ 			'fa-bolt', 'fa-bolt',
+ 			'fa-cube', 'fa-cube',
+ 			'fa-leaf','fa-leaf',
+ 			'fa-bicycle', 'fa-bicycle',
+			'fa-bomb', 'fa-bomb'];
 let open = [];
-
+let matched = 0;
 //shuffles the deck it would be ready to click
-function startGame(){
+function shuffleCards(){
 	deck = shuffle(deck);
 	let index = 0;
-	$.each($(".card i"), function(){
-		$(this).attr("class", "fa " + deck[index]);
+	$.each($('.card i'), function(){
+		$(this).attr('class', 'fa ' + deck[index]);
 		index++;
 		});
 	}
-$(startGame);
+$(shuffleCards);
 
 //checking if the card is open or match
 function isValid(card){
-	return !(card.hasClass("open") || card.hasClass("match"));
+	return !(card.hasClass('open') || card.hasClass('match'));
 };
 
 //check if cards are match
 function checkMatch(){
-	if (open[0].children().attr("class")===open[1].children().attr("class")) {
+	if (open[0].children().attr('class')===open[1].children().attr('class')) {
 		return true;
 	} else { return false; }
 };
@@ -30,9 +35,19 @@ function checkMatch(){
 //keep cards open if they match
 var setMatch = function() {
 	open.forEach(function(card) {
-		card.addClass("match");
+		card.addClass('match');
 	});
-	open = []; matched += 2;
+	open = [];
+	matched += 2;
+};
+
+//reset open
+var resetOpen = function() {
+	open.forEach(function(card) {
+		card.toggleClass('open');
+		card.toggleClass('show');
+	});
+	open = [];
 };
 
 //open the card using classes to show the first and second card
@@ -42,30 +57,31 @@ function openCard(card){
  		card.addClass('show');
  		open.push(card);
 	}
-
 };
 
-//click to show the card, we can just click on 2 cards
- $(".card").click(function onClick(){
+//click function, using match and time
+$(".card").click(function onClick(){
  	if (isValid( $(this) )) {
- 		if (open.length < 2) {
- 			openCard( $(this) );
- 			setTimeout(function(){
-            	open.forEach(function(card){
-            		card.removeClass('open','show');
-            	});
-    		}, 1000);
- 		}
- 	}
- });
+ 	  	if (open.length === 0) {
+ 	  		openCard( $(this) );
+ 	  	} else if (open.length === 1) {
+ 	  		openCard( $(this) );
+ 	    	if (checkMatch()) {
+            	setTimeout(setMatch, 300);
+        	} else {
+            	setTimeout(resetOpen, 700);
+        	}
+    	} 
+	}
+});
+
 
 //test for restarting the cards
- $(".restart").click(function(){
- 	startGame();
+ $(".restart").click(function(card){
  	card.removeClass('open');
  	card.removeClass('show');
  	card.removeClass('match');
- 	open = [];
+ 	shuffleCards();
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -93,23 +109,3 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
-// var allCards = document.querySelectorAll('.card');
-// var openCards = [];
-
-// allCards.forEach(function(card) {
-// 	card.addEventListener('click', function(e) {
-		
-
-// 		if (openCards.length >= 2) {
-// 			setTimeout (function(){
-// 				openCards.forEach(function (card){
-// 					card.classList.remove('open' , 'show');
-// 				});
-// 			}, 500);
-// 		} else {
-// 			openCards.push(card);
-// 			card.classList.add('open', 'show');			
-// 		}
-// 	});
-// });
