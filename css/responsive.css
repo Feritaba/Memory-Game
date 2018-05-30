@@ -4,26 +4,25 @@
   max-width: 100%;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 650px) {
 
   .score-panel {
     display: flex;
-    flex-flow: wrap;
   }
+  
   .restart{
     margin-left: 160px;
   }
 
   .deck {
     display: flex;
-    flex-flow: wrap;
-    width: 100%;
+    width: 100vmax;
+    height: 100vmax;
   }
 
   .card {
-    margin: 10px;
-    flex-grow: 1;
-    width: 50%;
+    width: 100vmax;
+    height: 100vmax;
   }
 }
 
