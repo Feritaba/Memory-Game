@@ -92,7 +92,8 @@ function moveCounter(){
  	$('li').removeClass('open');
  	$('li').removeClass('match');
  	shuffleCards();
-
+ 	moves = 0;
+    counter.innerHTML = moves;
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
