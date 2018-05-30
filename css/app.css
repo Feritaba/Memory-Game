@@ -87,6 +87,10 @@ h1 {
  * Styles for the Score Panel
  */
 
+.moves {
+    padding: 0 10px;
+}
+
 .score-panel {
     text-align: left;
     width: 345px;

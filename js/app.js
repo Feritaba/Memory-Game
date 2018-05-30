@@ -9,6 +9,8 @@ let deck = ['fa-diamond', 'fa-diamond',
 			'fa-bomb', 'fa-bomb'];
 let open = [];
 let matched = 0;
+let moves = 0;
+let counter = document.querySelector(".moves");
 
 //shuffles the deck it would be ready to click
 function shuffleCards(){
@@ -61,12 +63,13 @@ function openCard(card){
 };
 
 //click function, using match and time
-$(".card").click(function onClick(){
+$('.card').click(function onClick(){
  	if (isValid( $(this) )) {
  	  	if (open.length === 0) {
  	  		openCard( $(this) );
  	  	} else if (open.length === 1) {
  	  		openCard( $(this) );
+ 	  		moveCounter();
  	    	if (checkMatch()) {
             	setTimeout(setMatch, 300);
         	} else {
@@ -76,9 +79,14 @@ $(".card").click(function onClick(){
 	}
 });
 
+//move counter
+function moveCounter(){    
+    moves++;    
+    counter.innerHTML = moves;
+}
 
 //test for restarting the cards
- $(".restart").click(function(card){
+ $('.restart').click(function(card){
  	resetOpen();
  	$('li').removeClass('show');
  	$('li').removeClass('open');
