@@ -9,6 +9,7 @@ let deck = ['fa-diamond', 'fa-diamond',
 			'fa-bomb', 'fa-bomb'];
 let open = [];
 let matched = 0;
+
 //shuffles the deck it would be ready to click
 function shuffleCards(){
 	deck = shuffle(deck);
@@ -78,10 +79,12 @@ $(".card").click(function onClick(){
 
 //test for restarting the cards
  $(".restart").click(function(card){
- 	card.removeClass('open');
- 	card.removeClass('show');
- 	card.removeClass('match');
+ 	resetOpen();
+ 	$('li').removeClass('show');
+ 	$('li').removeClass('open');
+ 	$('li').removeClass('match');
  	shuffleCards();
+
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
