@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+
+  .score-panel {
+    display: flex;
+    flex-flow: wrap;
+  }
+  .restart{
+    margin-left: 160px;
+  }
+
+  .deck {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+  }
+
+  .card {
+    margin: 10px;
+    flex-grow: 1;
+    width: 50%;
+  }
+}
+
