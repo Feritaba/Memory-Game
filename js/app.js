@@ -11,6 +11,34 @@ let open = [];
 let matched = 0;
 let moves = 0;
 let counter = document.querySelector(".moves");
+let timer = {
+	seconds : 0,
+	minutes : 0,
+	clearTime: -1
+};
+
+//timer
+var startTimer = function(){
+	if (matched <=15 ) {
+		if (timer.seconds === 59) {
+			timer.minutes++;
+			timer.seconds = 0;
+		} else {
+			timer.seconds++;
+		}
+	}
+
+	//precedes seconds
+	var formattedSec = "0";
+	if (timer.seconds < 10) {
+		formattedSec += timer.seconds
+	} else {
+		formattedSec = String(timer.seconds);
+	}
+
+	var time = String(timer.minutes) + ":" + formattedSec;
+	$('.timer').text(time);
+}
 
 //shuffles the deck it would be ready to click
 function shuffleCards(){
@@ -53,7 +81,7 @@ var resetOpen = function() {
 	open = [];
 };
 
-//open the card using classes to show the first and second card
+//open the card
 function openCard(card){
  	if (!card.hasClass('open')){
  		card.addClass('open');
@@ -62,8 +90,11 @@ function openCard(card){
 	}
 };
 
-//click function, using match and time
+//click function
 $('.card').click(function onClick(){
+	if (timer.seconds == 0 && timer.minutes == 0){
+		resetTimer();
+	}
  	if (isValid( $(this) )) {
  	  	if (open.length === 0) {
  	  		openCard( $(this) );
@@ -79,24 +110,24 @@ $('.card').click(function onClick(){
 	}
 });
 
+
+//reset timer
+function resetTimer() {
+	clearInterval(timer.clearTime);
+	timer.seconds = 0;
+	timer.minutes = 0;
+	$('.timer').text('0:00');
+	timer.clearTime = setInterval(startTimer, 1000);
+};
+
 //move counter
 function moveCounter(){    
     moves++;    
     counter.innerHTML = moves;
 }
 
-//timer
-var startTimer = function() {
-  if (timer.seconds === 59) {
-    timer.minutes++;
-    timer.seconds = 0;
-  } else {
-    timer.seconds++;
-  }
-}
-
-//test for restarting the cards
- $('.restart').click(function(card){
+//reset button
+$('.restart').click(function(card){
  	resetOpen();
  	$('li').removeClass('show');
  	$('li').removeClass('open');
@@ -104,6 +135,8 @@ var startTimer = function() {
  	shuffleCards();
  	moves = 0;
     counter.innerHTML = moves;
+    matched = 0;
+    resetTimer();
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
