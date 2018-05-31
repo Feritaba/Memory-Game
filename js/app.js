@@ -85,6 +85,16 @@ function moveCounter(){
     counter.innerHTML = moves;
 }
 
+//timer
+var startTimer = function() {
+  if (timer.seconds === 59) {
+    timer.minutes++;
+    timer.seconds = 0;
+  } else {
+    timer.seconds++;
+  }
+}
+
 //test for restarting the cards
  $('.restart').click(function(card){
  	resetOpen();
