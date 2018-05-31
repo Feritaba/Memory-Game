@@ -1,4 +1,6 @@
 /* Memory Game */
+
+//varibales
 let deck = ['fa-diamond', 'fa-diamond',
 			'fa-paper-plane-o', 'fa-paper-plane-o',
  			'fa-anchor', 'fa-anchor',
@@ -29,7 +31,7 @@ var startTimer = function(){
 	}
 
 	//precedes seconds
-	var formattedSec = "0";
+	let formattedSec = "0";
 	if (timer.seconds < 10) {
 		formattedSec += timer.seconds
 	} else {
@@ -68,6 +70,7 @@ var setMatch = function() {
 	open.forEach(function(card) {
 		card.addClass('match');
 	});
+
 	open = [];
 	matched += 2;
 };
@@ -78,6 +81,7 @@ var resetOpen = function() {
 		card.toggleClass('open');
 		card.toggleClass('show');
 	});
+
 	open = [];
 };
 
@@ -95,6 +99,7 @@ $('.card').click(function onClick(){
 	if (timer.seconds == 0 && timer.minutes == 0){
 		resetTimer();
 	}
+
  	if (isValid( $(this) )) {
  	  	if (open.length === 0) {
  	  		openCard( $(this) );
@@ -110,7 +115,6 @@ $('.card').click(function onClick(){
 	}
 });
 
-
 //reset timer
 function resetTimer() {
 	clearInterval(timer.clearTime);
@@ -122,8 +126,13 @@ function resetTimer() {
 
 //move counter
 function moveCounter(){    
-    moves++;    
+    moves++;
     counter.innerHTML = moves;
+    if ( moves > 14 && moves < 20 ) {
+    	$('.stars li:last-child').hide();
+    } else if ( moves > 25 ) {
+    	$('.stars li:first-child').hide();
+    }
 }
 
 //reset button
@@ -137,6 +146,7 @@ $('.restart').click(function(card){
     counter.innerHTML = moves;
     matched = 0;
     resetTimer();
+
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -153,14 +163,3 @@ function shuffle(array) {
 
     return array;
 }
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
