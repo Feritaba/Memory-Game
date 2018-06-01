@@ -146,7 +146,7 @@ $('.restart').click(function(card){
     counter.innerHTML = moves;
     matched = 0;
     resetTimer();
-
+    clearInterval(timer.clearTime);
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
