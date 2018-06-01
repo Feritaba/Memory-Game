@@ -12,7 +12,7 @@ let deck = ['fa-diamond', 'fa-diamond',
 let open = [];
 let matched = 0;
 let moves = 0;
-let counter = document.querySelector(".moves");
+let counter = document.querySelector('.moves');
 let timer = {
 	seconds : 0,
 	minutes : 0,
@@ -147,7 +147,27 @@ $('.restart').click(function(card){
     matched = 0;
     resetTimer();
     clearInterval(timer.clearTime);
+    $('.stars li:first-child').show();
+    $('.stars li:last-child').show();
  });
+
+//Modal
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName('close')[0];
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function congrats() {
+	if ( matched == 8 ) {
+		//show congratulations
+	}
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
