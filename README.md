@@ -1,21 +1,24 @@
 # Memory Game Project
 
+A Udacity project developed using HTMl, CSS, JavaScript and jQuery.
+
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [How To Play](#how_to_play)
+* [Dependencies](#dependencies)
 
-## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## How to play
 
-To get started, open `js/app.js` and start building out the app's functionality
+Memory Game also known as Concentration game, is a game for children and adults. he goal is to match each card's icon with its pair. There are 16 cards and 8 pairs total. The game ends once all pairs are matched.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+You can easily track star rating and how many moves you made. At the end you will see your final timing, number of moves and also star rating.
+
+## Dependencies
+
+Dependencies are: font awesome, google fonts and jQuery.
 
 ## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 # Memory-Game
