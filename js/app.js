@@ -19,6 +19,14 @@ let timer = {
 	clearTime: -1
 };
 
+//Modal
+let myModal = $('#myModal');
+
+//Modal Box shows when you have won
+function showModal() {
+	myModal.css('display', 'block');
+};
+
 //timer
 var startTimer = function(){
 	if (matched <=15 ) {
@@ -65,6 +73,15 @@ function checkMatch(){
 	} else { return false; }
 };
 
+// Checks if you have won
+function hasWon() {
+	if ( matched === 16 ) {
+		return true;
+	} else {
+		return false;
+	} 
+};
+
 //keep cards open if they match
 var setMatch = function() {
 	open.forEach(function(card) {
@@ -73,6 +90,11 @@ var setMatch = function() {
 
 	open = [];
 	matched += 2;
+
+	if ( hasWon() ) {
+		clearInterval(timer.clearTime);
+		showModal();
+	}
 };
 
 //reset open
@@ -124,8 +146,8 @@ function resetTimer() {
 	timer.clearTime = setInterval(startTimer, 1000);
 };
 
-//move counter
-function moveCounter(){    
+//moves count and stars apply
+function moveCounter() {    
     moves++;
     counter.innerHTML = moves;
     if ( moves > 14 && moves < 20 ) {
@@ -151,23 +173,22 @@ $('.restart').click(function(card){
     $('.stars li:last-child').show();
  });
 
-//Modal
-var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName('close')[0];
-span.onclick = function() {
-    modal.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-function congrats() {
-	if ( matched == 8 ) {
-		//show congratulations
-	}
-}
+//play again button
+$('.play-again').click(function(card){
+ 	resetOpen();
+ 	$('li').removeClass('show');
+ 	$('li').removeClass('open');
+ 	$('li').removeClass('match');
+ 	shuffleCards();
+ 	moves = 0;
+    counter.innerHTML = moves;
+    matched = 0;
+    resetTimer();
+    clearInterval(timer.clearTime);
+    $('.stars li:first-child').show();
+    $('.stars li:last-child').show();
+    myModal.css('display','none');
+ });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

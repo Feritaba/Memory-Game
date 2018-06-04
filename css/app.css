@@ -92,6 +92,10 @@ h1 {
     padding: 0 10px;
 }
 
+.stars{
+    padding: 0 10px;
+}
+
 .timer{
     padding-left: 3em;
 }
@@ -144,6 +148,7 @@ h1 {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    text-align: center;
 }
 
 /* The Close Button */
