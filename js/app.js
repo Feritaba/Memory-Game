@@ -11,13 +11,15 @@ let deck = ['fa-diamond', 'fa-diamond',
 			'fa-bomb', 'fa-bomb'];
 let open = [];
 let matched = 0;
-let moves = 0;
-let counter = document.querySelector('.moves');
 let timer = {
 	seconds : 0,
 	minutes : 0,
 	clearTime: -1
 };
+let moveCounter = 0;
+let numStars = 3;
+let hard = 16;
+let medium = 25;
 
 //Modal
 let myModal = $('#myModal');
@@ -27,6 +29,28 @@ function showModal() {
 	myModal.css('display', 'block');
 };
 
+//remove the lasr star from the remaining then update HTML
+function removeStar() {
+	$('.fa-star').last().attr('class', 'fa fa-star-o');
+	numStars--;
+	$('.num-stars').text(String(numStars));
+};
+
+//resets stars to 3 updating HTML
+function resetStars() {
+	$('.fa-star').attr('class', 'fa fa-star');
+	numStars = 3;
+	$('.num-stars').text(String(numStars));
+};
+
+//Move counter updates, based on difficulty it will remove a star
+function updateMoveCounter() {
+	$('.moves').text(moveCounter);
+
+	if (moveCounter === hard || moveCounter == medium) {
+		removeStar();
+	}
+};
 //timer
 var startTimer = function(){
 	if (matched <=15 ) {
@@ -127,7 +151,8 @@ $('.card').click(function onClick(){
  	  		openCard( $(this) );
  	  	} else if (open.length === 1) {
  	  		openCard( $(this) );
- 	  		moveCounter();
+ 	  		moveCounter++;
+ 	  		updateMoveCounter();
  	    	if (checkMatch()) {
             	setTimeout(setMatch, 300);
         	} else {
@@ -146,17 +171,6 @@ function resetTimer() {
 	timer.clearTime = setInterval(startTimer, 1000);
 };
 
-//moves count and stars apply
-function moveCounter() {    
-    moves++;
-    counter.innerHTML = moves;
-    if ( moves > 14 && moves < 20 ) {
-    	$('.stars li:last-child').hide();
-    } else if ( moves > 25 ) {
-    	$('.stars li:first-child').hide();
-    }
-}
-
 //reset button
 $('.restart').click(function(card){
  	resetOpen();
@@ -164,13 +178,12 @@ $('.restart').click(function(card){
  	$('li').removeClass('open');
  	$('li').removeClass('match');
  	shuffleCards();
- 	moves = 0;
-    counter.innerHTML = moves;
+ 	moveCounter = 0;
+ 	updateMoveCounter();
     matched = 0;
     resetTimer();
     clearInterval(timer.clearTime);
-    $('.stars li:first-child').show();
-    $('.stars li:last-child').show();
+    resetStars();
  });
 
 //play again button
@@ -180,14 +193,13 @@ $('.play-again').click(function(card){
  	$('li').removeClass('open');
  	$('li').removeClass('match');
  	shuffleCards();
- 	moves = 0;
-    counter.innerHTML = moves;
+ 	moveCounter = 0;
+ 	updateMoveCounter();
     matched = 0;
     resetTimer();
     clearInterval(timer.clearTime);
-    $('.stars li:first-child').show();
-    $('.stars li:last-child').show();
-    myModal.css('display','none');
+	resetStars();
+	myModal.css('display','none');
  });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
